@@ -13,8 +13,21 @@ import axios from 'axios';
 
 // Create the rootSaga generator function
 function* rootSaga() {
-    yield takeEvery('FETCH_MOVIES', fetchAllMovies);
+    yield takeEvery('FETCH_MOVIES', fetchAllMovies)
+    yield takeEvery('FETCH_MOVIE_DETAILS', fetchMovieDetails)
+    ;
 }
+
+
+// const bikeDetails = (state = {}, action) => {
+//     switch (action.type) {
+//       case 'SET_BIKE_DETAILS':
+//         return action.payload
+//       case 'CLEAR_BIKE_DETAILS':
+//         return {}
+//       default:
+//         return state
+//     }
 
 function* fetchAllMovies() {
     // get all movies from the DB
@@ -29,6 +42,30 @@ function* fetchAllMovies() {
         
 }
 
+function fetchMovieDetails(action) {
+    const movieId = action.payload
+    const movieDetailsRes = yield axios({
+        method: 'GET',
+        url: `/api/movies/${movieId}`
+    })
+    yield put({
+        type: 'SET_MOVIE_DETAILS',
+        payload: movieDetailsRes.data
+    })
+}
+
+// function* fetchBikeDetails(action) {
+//     const bikeId = action.payload
+//     const bikeDetailsRes = yield axios({
+//       method: 'GET',
+//       url: `/api/bikes/${bikeId}`
+//     })
+//     yield put({
+//       type: 'SET_BIKE_DETAILS',
+//       payload: bikeDetailsRes.data
+//     })
+//   }
+
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
 
@@ -41,6 +78,28 @@ const movies = (state = [], action) => {
             return state;
     }
 }
+
+const movieDetails = (stat = {}, action) => {
+    switch (action.type) {
+        case 'SET_MOVIE_DETAILS':
+            return action.payload
+        case 'CLEAR_MOVIE_DETAILS':
+            return {}
+        default:
+            return state;
+    }
+}
+
+// const bikeDetails = (state = {}, action) => {
+//     switch (action.type) {
+//       case 'SET_BIKE_DETAILS':
+//         return action.payload
+//       case 'CLEAR_BIKE_DETAILS':
+//         return {}
+//       default:
+//         return state
+//     }
+//   }
 
 // Used to store the movie genres
 const genres = (state = [], action) => {
@@ -57,6 +116,7 @@ const storeInstance = createStore(
     combineReducers({
         movies,
         genres,
+        movieDetails
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),

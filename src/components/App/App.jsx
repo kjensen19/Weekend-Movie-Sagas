@@ -13,10 +13,10 @@ function App() {
         <Route path="/" exact>
           <MovieList />
         </Route>
-        <Route>
+        <Route exact path="/movies/:id">
           <MovieDetails />
         </Route>
-        <Route>
+        <Route exact path="/add">
           <AddMovie />
         </Route>
       </Router>
@@ -26,3 +26,5 @@ function App() {
 
 
 export default App;
+
+// exact path="/bikes/:id"
