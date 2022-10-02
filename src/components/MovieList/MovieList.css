@@ -1,4 +1,3 @@
-.movies {
-    display : flex;
-    flex-wrap: wrap;
+img{
+    border: .25rem solid white;
 }

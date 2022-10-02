@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './components/App/App.js';
+import App from './components/App/App.jsx';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 // Provider allows us to use redux within our react app
 import { Provider } from 'react-redux';
@@ -13,8 +13,21 @@ import axios from 'axios';
 
 // Create the rootSaga generator function
 function* rootSaga() {
-    yield takeEvery('FETCH_MOVIES', fetchAllMovies);
+    yield takeEvery('FETCH_MOVIES', fetchAllMovies)
+    yield takeEvery('FETCH_MOVIE_DETAILS', fetchMovieDetails)
+    ;
 }
+
+
+// const bikeDetails = (state = {}, action) => {
+//     switch (action.type) {
+//       case 'SET_BIKE_DETAILS':
+//         return action.payload
+//       case 'CLEAR_BIKE_DETAILS':
+//         return {}
+//       default:
+//         return state
+//     }
 
 function* fetchAllMovies() {
     // get all movies from the DB
@@ -29,6 +42,31 @@ function* fetchAllMovies() {
         
 }
 
+function* fetchMovieDetails(action) {
+    const movieId = action.payload
+    console.log('movie id in get details', movieId)
+    const movieDetailsRes = yield axios({
+        method: 'GET',
+        url: `/api/movie/${movieId}`
+    })
+    yield put({
+        type: 'SET_MOVIE_DETAILS',
+        payload: movieDetailsRes.data
+    })
+}
+
+// function* fetchBikeDetails(action) {
+//     const bikeId = action.payload
+//     const bikeDetailsRes = yield axios({
+//       method: 'GET',
+//       url: `/api/bikes/${bikeId}`
+//     })
+//     yield put({
+//       type: 'SET_BIKE_DETAILS',
+//       payload: bikeDetailsRes.data
+//     })
+//   }
+
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
 
@@ -41,6 +79,29 @@ const movies = (state = [], action) => {
             return state;
     }
 }
+
+const movieDetails = (state = {array_agg: []}, action) => {
+    switch (action.type) {
+        case 'SET_MOVIE_DETAILS':
+            console.log('in details reducer', action.payload)
+            return action.payload[0]
+        case 'CLEAR_MOVIE_DETAILS':
+            return {array_agg: []}
+        default:
+            return state;
+    }
+}
+
+// const bikeDetails = (state = {}, action) => {
+//     switch (action.type) {
+//       case 'SET_BIKE_DETAILS':
+//         return action.payload
+//       case 'CLEAR_BIKE_DETAILS':
+//         return {}
+//       default:
+//         return state
+//     }
+//   }
 
 // Used to store the movie genres
 const genres = (state = [], action) => {
@@ -57,6 +118,7 @@ const storeInstance = createStore(
     combineReducers({
         movies,
         genres,
+        movieDetails
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),

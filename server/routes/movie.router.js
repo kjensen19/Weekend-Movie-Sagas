@@ -4,7 +4,18 @@ const pool = require('../modules/pool')
 
 router.get('/', (req, res) => {
 
-  const query = `SELECT * FROM movies ORDER BY "title" ASC`;
+  const query = ` 
+  SELECT 
+    movies.id,
+    title,
+    poster, 
+    description,
+    ARRAY_AGG (genres.name) 
+  FROM movies
+    join movies_genres on movies_genres.movie_id=movies.id
+    join genres on genres.id=movies_genres.genre_id
+    group by movies.id
+      order by id asc;`;
   pool.query(query)
     .then( result => {
       res.send(result.rows);
@@ -15,6 +26,57 @@ router.get('/', (req, res) => {
     })
 
 });
+
+// GET DETAILED INFO ABOUT ONE BIKE!
+// router.get('/:id', (req, res) => {
+//   console.log('GET /api/bikes/:id')
+//   const sqlText = `
+//     SELECT 
+//       "bikes"."id",
+//       "manufacturer",
+//       "model",
+//       "year",
+//       "color",
+//       "type"
+//     FROM "bikes"
+//       JOIN "bikeTypes"
+//         ON "bikes"."bikeTypeId"="bikeTypes"."id"
+//       WHERE "bikes"."id"=$1;
+//   `
+//   const sqlValues = [req.params.id]
+//   pool.query(sqlText, sqlValues)
+//     .then(dbRes => {
+//       res.send(dbRes.rows[0])
+//     })
+//     .catch(dbErr => {
+//       console.error('GET /api/bikes/:id error', dbErr)
+//       res.sendStatus(500)
+//     })
+// })
+
+router.get('/:id', (req, res) => {
+  const sqlText = `
+    SELECT 
+      movies.id,
+      title,
+      poster, 
+      description,
+      ARRAY_AGG (genres.name) 
+    FROM movies
+      join movies_genres on movies_genres.movie_id=movies.id
+      join genres on genres.id=movies_genres.genre_id
+    where movies.id=$1
+      group by movies.id;
+  `
+  pool.query(sqlText,[req.params.id])
+    .then( result => {
+      res.send(result.rows);
+    })
+    .catch(err => {
+      console.log('ERROR: Get all movies', err);
+      res.sendStatus(500)
+  })
+})
 
 router.post('/', (req, res) => {
   console.log(req.body);
