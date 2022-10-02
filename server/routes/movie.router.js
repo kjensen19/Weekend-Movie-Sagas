@@ -27,33 +27,6 @@ router.get('/', (req, res) => {
 
 });
 
-// GET DETAILED INFO ABOUT ONE BIKE!
-// router.get('/:id', (req, res) => {
-//   console.log('GET /api/bikes/:id')
-//   const sqlText = `
-//     SELECT 
-//       "bikes"."id",
-//       "manufacturer",
-//       "model",
-//       "year",
-//       "color",
-//       "type"
-//     FROM "bikes"
-//       JOIN "bikeTypes"
-//         ON "bikes"."bikeTypeId"="bikeTypes"."id"
-//       WHERE "bikes"."id"=$1;
-//   `
-//   const sqlValues = [req.params.id]
-//   pool.query(sqlText, sqlValues)
-//     .then(dbRes => {
-//       res.send(dbRes.rows[0])
-//     })
-//     .catch(dbErr => {
-//       console.error('GET /api/bikes/:id error', dbErr)
-//       res.sendStatus(500)
-//     })
-// })
-
 router.get('/:id', (req, res) => {
   const sqlText = `
     SELECT 
@@ -92,21 +65,32 @@ router.post('/', (req, res) => {
     console.log('New Movie Id:', result.rows[0].id); //ID IS HERE!
     
     const createdMovieId = result.rows[0].id
-
     // Now handle the genre reference
     const insertMovieGenreQuery = `
       INSERT INTO "movies_genres" ("movie_id", "genre_id")
       VALUES  ($1, $2);
       `
       // SECOND QUERY ADDS GENRE FOR THAT NEW MOVIE
-      pool.query(insertMovieGenreQuery, [createdMovieId, req.body.genre_id]).then(result => {
+      console.log('genres', req.body.genre)
+      for(let genre of req.body.genre){
+        const genQuery= `
+          select id from genres
+          where genres.name=$1;`
+          const genVal=[genre]
+          console.log('genVal', genVal)
+          pool.query(genQuery, genVal).then(result => {
+            console.log('rez???', result.rows[0].id)
+            pool.query(insertMovieGenreQuery, [createdMovieId, result.rows[0].id]).then(result => {
+
+          })})}
+      
         //Now that both are done, send back success!
-        res.sendStatus(201);
+        // res.sendStatus(201);
       }).catch(err => {
         // catch for second query
         console.log(err);
         res.sendStatus(500)
-      })
+      
 
 // Catch for first query
   }).catch(err => {

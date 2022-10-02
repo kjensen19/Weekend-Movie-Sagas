@@ -3,13 +3,18 @@ import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import * as React from 'react';
 import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
 import ListItemText from '@mui/material/ListItemText';
 import Select from '@mui/material/Select';
 import Checkbox from '@mui/material/Checkbox';
 import Stack from '@mui/material/Stack';
+import Paper from '@mui/material/Paper';
+import Button from '@mui/material/Button';
+import InputLabel from '@mui/material/InputLabel';
+
+import './AddMovie.css'
+
+
 
 
 const ITEM_HEIGHT = 48;
@@ -23,64 +28,12 @@ const MenuProps = {
   },
 };
 
-// const names = [
-//   'Oliver Hansen',
-//   'Van Henry',
-//   'April Tucker',
-//   'Ralph Hubbard',
-//   'Omar Alexander',
-//   'Carlos Abbott',
-//   'Miriam Wagner',
-//   'Bradley Wilkerson',
-//   'Virginia Andrews',
-//   'Kelly Snyder',
-// ];
-
-// export default function MultipleSelectCheckmarks() {
-//   const [personName, setPersonName] = React.useState([]);
-
-//   const handleChange = (event) => {
-//     const {
-//       target: { value },
-//     } = event;
-//     setPersonName(
-//       // On autofill we get a stringified value.
-//       typeof value === 'string' ? value.split(',') : value,
-//     );
-//   };
-
-//   return (
-//     <div>
-//       <FormControl sx={{ m: 1, width: 300 }}>
-//         <InputLabel id="demo-multiple-checkbox-label">Tag</InputLabel>
-//         <Select
-//           labelId="demo-multiple-checkbox-label"
-//           id="demo-multiple-checkbox"
-//           multiple
-//           value={personName}
-//           onChange={handleChange}
-//           input={<OutlinedInput label="Tag" />}
-//           renderValue={(selected) => selected.join(', ')}
-//           MenuProps={MenuProps}
-//         >
-//           {names.map((name) => (
-//             <MenuItem key={name} value={name}>
-//               <Checkbox checked={personName.indexOf(name) > -1} />
-//               <ListItemText primary={name} />
-//             </MenuItem>
-//           ))}
-//         </Select>
-//       </FormControl>
-//     </div>
-//   );
-// }
-
 
 function AddMovie() {
     const history = useHistory()
     const dispatch = useDispatch()
     const intialValues = {
-        url:'',
+        poster:'',
         title:'',
         description:'',
         genre:[]
@@ -123,21 +76,35 @@ function AddMovie() {
     ]
 
     return(
-        <section className="inputSec">
-            <form onSubmit={handleSubmit}>
-            <Stack width={200} alignItems='center'>
-                    <input type="url" placeholder="Photo URL" value={movie.url} name='url' onChange={handleInputChange} />
-                    <input type="text" placeholder="Movie Title" value={movie.title} name='title' onChange={handleInputChange} />
-                    <input type="text" placeholder="Description" value={movie.description} name='description' onChange={handleInputChange} />
+        <Paper id="addContainer" >
+            <form onSubmit={handleSubmit} color="inherit">
+            <Stack  alignItems='center' color="inherit" spacing={4}>
+                <h1>Add A Movie</h1>
+
+                    <input
+                        required
+                        type="text" 
+                        color="inherit" 
+                        placeholder="Photo URL" 
+                        value={movie.poster} 
+                        name='poster' 
+                        onChange={handleInputChange} 
+                        />
+                    <input required type="text" color="inherit" placeholder="Movie Title" value={movie.title} name='title' onChange={handleInputChange} />
+                    <input required type="text" color="inherit" placeholder="Description" value={movie.description} name='description' onChange={handleInputChange} />
+                    <InputLabel id="dropLabel">Genre:</InputLabel>
                     <Select
+                        required
                         id="demo-multiple-checkbox"
                         multiple
                         value={movie.genre}
                         name="genre"
                         onChange={handleInputChange}
-                        input={<OutlinedInput label="Tag" />}
+                        input={<OutlinedInput label="Genre" />}
                         renderValue={(selected) => selected.join(', ')}
                         MenuProps={MenuProps}
+                        variant='filled'
+                        placeholder='Genre'
                     >
                     {genres.map((g) => (
                         <MenuItem key={g} value={g} >
@@ -145,13 +112,17 @@ function AddMovie() {
                             <ListItemText primary={g} />
                         </MenuItem>
             ))}     </Select>
-                    <button onClick={() => history.push('/')}>Back to List</button>
-                    <button type="submit">Submit</button>
+                    <Stack direction={'row'} spacing={2}>
+                        <Button className="class" variant='outlined' color="inherit" onClick={() => history.push('/')}>Back to List</Button>
+                        <Button className="class" variant='outlined' color="inherit" type="submit">Submit</Button>
+                    </Stack>
+                    <h1>Image Preview:</h1>
+                    <img src={movie.poster} />
                 </Stack>
             </form>
+        </Paper>
             
 
-        </section>
     )
 }
 
