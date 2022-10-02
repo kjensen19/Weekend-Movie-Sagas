@@ -44,18 +44,18 @@ We've added some movie posters in the `public/images` folder, and the database i
 
 This view is completed already! It displays all of the movies in the movie database. 
 
-- TODO: When a movie poster is clicked, a user should be brought to the `/details` view for that movie.
+🔥- TODO: When a movie poster is clicked, a user should be brought to the `/details` view for that movie.
 
 ### Details Page
 
-This should show all details **including ALL genres** for the selected movie, including title, description, and the image, too! Use Sagas and Redux to handle these requests and data.
+🔥This should show all details **including ALL genres** for the selected movie, including title, description, and the image, too! Use Sagas and Redux to handle these requests and data.
 
-- TODO: The details page should have a `Back to List` button, which should bring the user to the Home/List Page
+🔥- TODO: The details page should have a `Back to List` button, which should bring the user to the Home/List Page
 
-> Base functionality does not require the movie details to load correctly after refresh of the browser.
+🔥> Base functionality does not require the movie details to load correctly after refresh of the browser.
 
 
- > Hint : You can make a GET request for a specific movie. Remember `req.params` and `:id`?
+ 🔥> Hint : You can make a GET request for a specific movie. Remember `req.params` and `:id`?
 ---
 
 ### General Considerations
@@ -94,7 +94,7 @@ The Add Movie page should have the buttons:
 > Hint: You'll want to use the genres that are in the db for your dropdown
 
 
-### 2. Refresh on Details Page
+🔥### 2. Refresh on Details Page
 Allow the app to maintain on refresh our details page.
 Research [React Router URL PARAMS](https://reactrouter.com/web/example/url-params) 
 
@@ -114,9 +114,9 @@ The edit page should have the buttons:
 ### Other Ideas
 
 - [ ] Display the current values in the input (title) and textarea (description) on the Edit Page
-- [ ] Display all genres on movie list page. Research [array_agg](https://stackoverflow.com/questions/43458174/how-to-save-and-return-javascript-object-with-subarray-in-normalized-sql) to make this possible.
+- [🔥] Display all genres on movie list page. Research [array_agg](https://stackoverflow.com/questions/43458174/how-to-save-and-return-javascript-object-with-subarray-in-normalized-sql) to make this possible.
 - [ ] Move sagas and reducers out of your `index.js` and into separate files (ideally in `src/redux/reducers` and `src/redux/sagas` folders).
-- [ ] Allow the user to refresh the details or edit page. The url for the details page would be something like `/details/1` for movie with id of `1`. Research [react router params](https://reacttraining.com/react-router/web/example/url-params).
+- [🔥] Allow the user to refresh the details or edit page. The url for the details page would be something like `/details/1` for movie with id of `1`. Research [react router params](https://reacttraining.com/react-router/web/example/url-params).
 - [ ] Allow the user to add a genre to a movie.
 - [ ] Allow the user to remove a genre from a movie.
 - [ ] Only display the top 10 movies, and allow the user to search for movie titles with a search bar on the home page (you can do this on the client side or the server side, server side is a bigger stretch, but good practice).

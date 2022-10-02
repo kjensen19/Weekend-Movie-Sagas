@@ -11,8 +11,8 @@ function MovieItem({ movie }) {
         history.push(`/movies/${movie.id}`)
     }
     return(
-        <div key={movie.id} onClick={handleDetailsClick}>
-            <h3>{movie.title}</h3>
+        <div key={movie.id} onClick={handleDetailsClick} className="crossBar">
+            {/* <h3>{movie.title}</h3> */}
             <img src={movie.poster} alt={movie.title}/>
         </div>
     )
