@@ -80,13 +80,13 @@ const movies = (state = [], action) => {
     }
 }
 
-const movieDetails = (state = {}, action) => {
+const movieDetails = (state = {array_agg: []}, action) => {
     switch (action.type) {
         case 'SET_MOVIE_DETAILS':
             console.log('in details reducer', action.payload)
             return action.payload[0]
         case 'CLEAR_MOVIE_DETAILS':
-            return {}
+            return {array_agg: []}
         default:
             return state;
     }

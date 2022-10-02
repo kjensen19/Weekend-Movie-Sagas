@@ -30,7 +30,11 @@ function MovieDetails() {
             <h1>{movieDetails.title}</h1>
             <img src={movieDetails.poster} />
             <p>{movieDetails.description}</p>
-            <p>{movieDetails.array_agg}</p>
+            <ul>{movieDetails.array_agg.map(genre => {
+                return(
+                    <li>{genre}</li>
+                )
+            })}</ul>
             <button>EDIT</button>
             <button onClick={() => history.push('/')}>BACK TO MAIN</button>
         </section>
@@ -43,6 +47,7 @@ export default MovieDetails;
 //     return (
 //         <MovieItem movie={movie}/>
 //     );
+// })}
 
 // const params = useParams()
 // const dispatch = useDispatch()
