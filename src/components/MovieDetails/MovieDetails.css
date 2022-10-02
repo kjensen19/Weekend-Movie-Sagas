@@ -1,0 +1,15 @@
+.infoCard{
+    margin-left: 25rem
+}
+
+.moreInfo {
+    position: absolute;
+    left: 60%;
+    top: 20%;
+}
+
+#moreInfoLabel{
+   margin-left: 14rem;
+}
+
+

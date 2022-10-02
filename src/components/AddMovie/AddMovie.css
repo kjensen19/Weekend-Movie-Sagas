@@ -1,0 +1,22 @@
+#addContainer {
+    height: 100vh
+}
+
+input{
+    border-radius: 2rem;
+    height: 4rem;
+    width: 24rem;
+}
+
+#demo-multiple-checkbox{
+    width:20rem;
+}
+
+#dropLabel{
+    font-size: 2rem;
+}
+
+#detailPoster:hover{
+    transform: none;
+}
+

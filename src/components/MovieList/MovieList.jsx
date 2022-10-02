@@ -20,18 +20,17 @@ function MovieList() {
     }, []);
 
     return (
-        <main>
-            <Box sx={{ width: .9, height: .75, overflowY: 'scroll', }}>
-                <ImageList variant="masonry" cols={4} gap={20}>
-                    {movies.map((movie) => (
-                        <Paper elevation={10}>
-                            <MovieItem movie={movie} />
-                        </Paper>
-                    ))}
-                </ImageList>
-            </Box>
-            <button onClick={()=> {history.push('/add')}}>Add Movie!</button>
-        </main>
+            <Paper >
+                <Box sx={{ width: 1, height: .75, paddingTop: 2 }}>
+                    <ImageList variant="masonry" cols={4} gap={40}>
+                        {movies.map((movie) => (
+                            <Paper elevation={10}>
+                                <MovieItem movie={movie} />
+                            </Paper>
+                        ))}
+                    </ImageList>
+                </Box>
+            </Paper>
   );
 }
 

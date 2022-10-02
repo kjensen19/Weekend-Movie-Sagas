@@ -15,19 +15,9 @@ import axios from 'axios';
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies)
     yield takeEvery('FETCH_MOVIE_DETAILS', fetchMovieDetails)
+    yield takeEvery('ADD_MOVIE', addMovie)
     ;
 }
-
-
-// const bikeDetails = (state = {}, action) => {
-//     switch (action.type) {
-//       case 'SET_BIKE_DETAILS':
-//         return action.payload
-//       case 'CLEAR_BIKE_DETAILS':
-//         return {}
-//       default:
-//         return state
-//     }
 
 function* fetchAllMovies() {
     // get all movies from the DB
@@ -55,17 +45,17 @@ function* fetchMovieDetails(action) {
     })
 }
 
-// function* fetchBikeDetails(action) {
-//     const bikeId = action.payload
-//     const bikeDetailsRes = yield axios({
-//       method: 'GET',
-//       url: `/api/bikes/${bikeId}`
-//     })
-//     yield put({
-//       type: 'SET_BIKE_DETAILS',
-//       payload: bikeDetailsRes.data
-//     })
-//   }
+function* addMovie(action) {
+    console.log('this?', action.payload)
+    yield axios({
+        method: 'POST',
+        url:'/api/movie',
+        data: action.payload
+    })
+    yield put({
+        type: 'FETCH_MOVIES'
+    })
+}
 
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
@@ -91,17 +81,6 @@ const movieDetails = (state = {array_agg: []}, action) => {
             return state;
     }
 }
-
-// const bikeDetails = (state = {}, action) => {
-//     switch (action.type) {
-//       case 'SET_BIKE_DETAILS':
-//         return action.payload
-//       case 'CLEAR_BIKE_DETAILS':
-//         return {}
-//       default:
-//         return state
-//     }
-//   }
 
 // Used to store the movie genres
 const genres = (state = [], action) => {

@@ -1,6 +1,5 @@
 import { useHistory } from 'react-router-dom'
 import ImageListItem from '@mui/material/ImageListItem';
-import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 
 
@@ -18,18 +17,24 @@ function MovieItem({ movie }) {
         history.push(`/movies/${movie.id}`)
     }
     return(
-        <Paper elevation={0} >
-            <ImageListItem key={movie.img}  >
-                <img
-                    key={movie.id}
-                    onClick={handleDetailsClick}
-                    src={`${movie.poster}?w=496&fit=crop&auto=format`}
-                    srcSet={`${movie.poster}?w=496&fit=crop&auto=format&dpr=2 2x`}
-                    alt={movie.title}
-                    loading="lazy"
-                />
-            </ImageListItem>
-        </Paper>
+            <Paper elevation={20}>
+                <Paper elevation={15}>
+                    <Paper elevation={10}>
+                        <Paper elevation={5}>
+                            <ImageListItem key={movie.img} className="frame">
+                                <img
+                                    key={movie.id}
+                                    onClick={handleDetailsClick}
+                                    src={`${movie.poster}?w=496&fit=crop&auto=format`}
+                                    srcSet={`${movie.poster}?w=496&fit=crop&auto=format&dpr=2 2x`}
+                                    alt={movie.title}
+                                    loading="lazy"
+                                />
+                            </ImageListItem>
+                        </Paper>
+                    </Paper>
+                </Paper>
+            </Paper>
 
     )
 }
@@ -40,15 +45,3 @@ export default MovieItem
 
 
 
-
-// function BikeItem({ bike }) {
-//   const history = useHistory()
-
-//   const handleDetailsClick = () => {
-//     console.log(bike.id)
-//     // dispatch({
-//     //   type: 'FETCH_BIKE_DETAILS',
-//     //   payload: bike.id
-//     // })
-//     history.push(`/bikes/${bike.id}`)
-//   }
