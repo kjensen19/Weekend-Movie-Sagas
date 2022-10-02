@@ -3,6 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import './MovieList.css'
 import MovieItem from './MovieItem';
 import { useHistory } from 'react-router-dom'
+import Box from '@mui/material/Box';
+import ImageList from '@mui/material/ImageList';
+import Paper from '@mui/material/Paper';
+
+
+
 
 function MovieList() {
     const history = useHistory()
@@ -15,23 +21,18 @@ function MovieList() {
 
     return (
         <main>
-            <h1>MovieList</h1>
-            <section className="outerFrame">
-                <div className="movies">
-                    <div className="imgFrame">
-                        {movies.map(movie => {
-                            return (
-                                <MovieItem movie={movie}/>
-                            );
-                        })}
-                    </div>
-                </div>
-            </section>
-            <button onClick={()=>history.push('/add')}>Add movie</button>
+            <Box sx={{ width: .9, height: .75, overflowY: 'scroll', }}>
+                <ImageList variant="masonry" cols={4} gap={20}>
+                    {movies.map((movie) => (
+                        <Paper elevation={10}>
+                            <MovieItem movie={movie} />
+                        </Paper>
+                    ))}
+                </ImageList>
+            </Box>
+            <button onClick={()=> {history.push('/add')}}>Add Movie!</button>
         </main>
-
-
-    );
+  );
 }
 
 export default MovieList;

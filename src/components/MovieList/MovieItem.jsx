@@ -1,4 +1,11 @@
 import { useHistory } from 'react-router-dom'
+import ImageListItem from '@mui/material/ImageListItem';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+
+
+
+
 
 
 
@@ -11,14 +18,26 @@ function MovieItem({ movie }) {
         history.push(`/movies/${movie.id}`)
     }
     return(
-        <div key={movie.id} onClick={handleDetailsClick} className="crossBar">
-            {/* <h3>{movie.title}</h3> */}
-            <img src={movie.poster} alt={movie.title}/>
-        </div>
+        <Paper elevation={0} >
+            <ImageListItem key={movie.img}  >
+                <img
+                    key={movie.id}
+                    onClick={handleDetailsClick}
+                    src={`${movie.poster}?w=496&fit=crop&auto=format`}
+                    srcSet={`${movie.poster}?w=496&fit=crop&auto=format&dpr=2 2x`}
+                    alt={movie.title}
+                    loading="lazy"
+                />
+            </ImageListItem>
+        </Paper>
+
     )
 }
 
 export default MovieItem
+
+
+
 
 
 
