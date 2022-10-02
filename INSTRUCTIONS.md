@@ -55,17 +55,17 @@ This view is completed already! It displays all of the movies in the movie datab
 🔥> Base functionality does not require the movie details to load correctly after refresh of the browser.
 
 
- 🔥> Hint : You can make a GET request for a specific movie. Remember `req.params` and `:id`?
+ > Hint : You can make a GET request for a specific movie. Remember `req.params` and `:id`?
 ---
 
 ### General Considerations
 
 As one of your last projects, it's possible you will be sharing this with employers, so be sure to follow best practices and make it look good!
 
-- [ ] Invest some time in styling it up!
+- [🔥] Invest some time in styling it up!
     - [ ] Research cards for your movie posters on the list page
-    - [ ] Research grids for your movie posters on the Movie List page
-- [ ] Commit your code frequently! You should have at 15+ commits on a project of this size. Use branches to help break down your features.
+    - [🔥] Research grids for your movie posters on the Movie List page
+- [🔥] Commit your code frequently! You should have at 15+ commits on a project of this size. Use branches to help break down your features.
 - [ ] Comment your code.
 - [ ] Update this README to include a description of the project in your own words.
 
@@ -77,24 +77,24 @@ As one of your last projects, it's possible you will be sharing this with employ
 
 This should show:
 
-- an input field (for the movie title)
-- an input field (for the movie poster image URL))
-- a textarea (for the movie description)
-- a dropdown (for the genres)
+🔥- an input field (for the movie title)
+🔥- an input field (for the movie poster image URL))
+🔥- a textarea (for the movie description)
+🔥- a dropdown (for the genres)
 
 The Add Movie page should have the buttons:
 
-- `Cancel` button, which should bring the user to the Home/List Page
-- `Save` button, which should save these inputs in the database and bring the user to the Home/List Page (which now has the new movie)
+🔥- `Cancel` button, which should bring the user to the Home/List Page
+🔥- `Save` button, which should save these inputs in the database and bring the user to the Home/List Page (which now has the new movie)
 
 **Base functionality does not require being able to select more than one genre for a new movie**
 
 > Hint: Look at the /api/movie POST route -- it's been made already but is performing 2 queries: one to store the movie information and another to store the genre in the junction table.
 
-> Hint: You'll want to use the genres that are in the db for your dropdown
+🔥> Hint: You'll want to use the genres that are in the db for your dropdown
 
 
-🔥### 2. Refresh on Details Page
+### 2. Refresh on Details Page🔥
 Allow the app to maintain on refresh our details page.
 Research [React Router URL PARAMS](https://reactrouter.com/web/example/url-params) 
 
