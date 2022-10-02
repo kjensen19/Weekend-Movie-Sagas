@@ -42,11 +42,12 @@ function* fetchAllMovies() {
         
 }
 
-function fetchMovieDetails(action) {
+function* fetchMovieDetails(action) {
     const movieId = action.payload
+    console.log('movie id in get details', movieId)
     const movieDetailsRes = yield axios({
         method: 'GET',
-        url: `/api/movies/${movieId}`
+        url: `/api/movie/${movieId}`
     })
     yield put({
         type: 'SET_MOVIE_DETAILS',
@@ -79,10 +80,11 @@ const movies = (state = [], action) => {
     }
 }
 
-const movieDetails = (stat = {}, action) => {
+const movieDetails = (state = {}, action) => {
     switch (action.type) {
         case 'SET_MOVIE_DETAILS':
-            return action.payload
+            console.log('in details reducer', action.payload)
+            return action.payload[0]
         case 'CLEAR_MOVIE_DETAILS':
             return {}
         default:

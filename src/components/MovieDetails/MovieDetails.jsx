@@ -1,13 +1,15 @@
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
+import { useHistory} from 'react-router-dom'
 
 function MovieDetails() {
+    const history = useHistory()
     const params = useParams()
     const dispatch = useDispatch()
     
     useEffect(() => {
-        const movieId = params.dispatch
+        const movieId = params.id
 
         dispatch({
             type: 'FETCH_MOVIE_DETAILS',
@@ -22,20 +24,25 @@ function MovieDetails() {
     }, [params.id])
 
     const movieDetails = useSelector(store => store.movieDetails)
-
+    console.log(movieDetails)
     return(
         <section>
             <h1>{movieDetails.title}</h1>
             <img src={movieDetails.poster} />
             <p>{movieDetails.description}</p>
-            <p>{movieDetails.genres}</p>
+            <p>{movieDetails.array_agg}</p>
             <button>EDIT</button>
-            <button>BACK TO MAIN</button>
+            <button onClick={() => history.push('/')}>BACK TO MAIN</button>
         </section>
     )
 }
 
 export default MovieDetails;
+
+// {movies.map(movie => {
+//     return (
+//         <MovieItem movie={movie}/>
+//     );
 
 // const params = useParams()
 // const dispatch = useDispatch()
