@@ -10,10 +10,8 @@ import Paper from '@mui/material/Paper';
 
 function MovieItem({ movie }) {
     const history = useHistory()
-    console.log("Movie info equals (in item) ", movie)
-
+        //push to detail page
     const handleDetailsClick = () => {
-        console.log('movie id in details click', movie.id)
         history.push(`/movies/${movie.id}`)
     }
     return(

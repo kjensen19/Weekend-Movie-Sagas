@@ -16,7 +16,7 @@ import './AddMovie.css'
 
 
 
-
+//MUI control for dropdown
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -32,6 +32,8 @@ const MenuProps = {
 function AddMovie() {
     const history = useHistory()
     const dispatch = useDispatch()
+    //set intial values for the input object to make resets easier
+    //genre is an array so we can add multiples
     const intialValues = {
         poster:'',
         title:'',
@@ -41,24 +43,22 @@ function AddMovie() {
     const [movie, setMovie] = useState(intialValues)
 
     const handleInputChange = (e) => {
-        //const name = e.target.name 
-        //const value = e.target.value 
         const { name, value } = e.target;
         setMovie({
           ...movie,
           [name]: value,
         });
       };
-
+      //dispatch add movie (which triggers SAGA POST)
     const handleSubmit = () => {
-        console.log('In handle submit', movie)
         dispatch({
             type: 'ADD_MOVIE',
             payload: movie
         })
+        //reset input values
         setMovie(intialValues)
-
     }
+    //Genre list for dropdown
     const genres = [
         'Adventure',
         'Animated',

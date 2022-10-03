@@ -20,7 +20,7 @@ import TheatersIcon from '@mui/icons-material/Theaters';
 import EditIcon from '@mui/icons-material/Edit';
 import HomeIcon from '@mui/icons-material/Home';
 
-
+//Setup for MUI more info section of card
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -39,7 +39,8 @@ function MovieDetails() {
     const dispatch = useDispatch()
     const [expanded, setExpanded] = React.useState(false);
 
-    
+    //on page load use param (id) to get details
+    //on exit clear
     useEffect(() => {
         const movieId = params.id
 
@@ -59,7 +60,6 @@ function MovieDetails() {
         setExpanded(!expanded);
     }
     const movieDetails = useSelector(store => store.movieDetails)
-    console.log(movieDetails)
 
     return(
         <Card sx={{width: 500, height: 950, }} className="infoCard">

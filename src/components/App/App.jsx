@@ -13,6 +13,7 @@ import ButtonBar from './ButtonBar';
 
 
 function App() {
+  //Dark mode toggle setup
   const [colorMode, setColorMode] = useState('dark')
   const darkTheme = createTheme({
     palette: {
@@ -20,9 +21,6 @@ function App() {
     },
   });
 
-  function toggleColor() {
-    colorMode === 'light' ? setColorMode('dark') : setColorMode('light')
-}
   return (
     <ThemeProvider theme={darkTheme}>
       <Paper className={colorMode} elevation={8} color="inherit">

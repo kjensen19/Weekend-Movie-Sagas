@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool')
 
+  //Get all movies and genres by joining tables in query
 router.get('/', (req, res) => {
-
   const query = ` 
   SELECT 
     movies.id,
@@ -26,7 +26,7 @@ router.get('/', (req, res) => {
     })
 
 });
-
+  //Get all detailed information for specific movie by id
 router.get('/:id', (req, res) => {
   const sqlText = `
     SELECT 
@@ -50,7 +50,7 @@ router.get('/:id', (req, res) => {
       res.sendStatus(500)
   })
 })
-
+  //POST first insert into movie table and return id
 router.post('/', (req, res) => {
   console.log(req.body);
   // RETURNING "id" will give us back the id of the created movie
@@ -71,7 +71,10 @@ router.post('/', (req, res) => {
       VALUES  ($1, $2);
       `
       // SECOND QUERY ADDS GENRE FOR THAT NEW MOVIE
+      //We use this query inside the for loop for each insert
       console.log('genres', req.body.genre)
+      //Loop through all the assigned genres to get the genre id
+      //then use above query to insert based on the return
       for(let genre of req.body.genre){
         const genQuery= `
           select id from genres

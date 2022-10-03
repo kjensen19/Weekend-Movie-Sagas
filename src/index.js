@@ -23,7 +23,6 @@ function* fetchAllMovies() {
     // get all movies from the DB
     try {
         const movies = yield axios.get('/api/movie');
-        console.log('get all:', movies.data);
         yield put({ type: 'SET_MOVIES', payload: movies.data });
 
     } catch {
@@ -31,10 +30,9 @@ function* fetchAllMovies() {
     }
         
 }
-
+//get details(movie and genre)
 function* fetchMovieDetails(action) {
     const movieId = action.payload
-    console.log('movie id in get details', movieId)
     const movieDetailsRes = yield axios({
         method: 'GET',
         url: `/api/movie/${movieId}`
@@ -44,9 +42,8 @@ function* fetchMovieDetails(action) {
         payload: movieDetailsRes.data
     })
 }
-
+//POST
 function* addMovie(action) {
-    console.log('this?', action.payload)
     yield axios({
         method: 'POST',
         url:'/api/movie',
@@ -69,11 +66,11 @@ const movies = (state = [], action) => {
             return state;
     }
 }
-
+//detail view reducer and clear, set to array to prevent error on
+//load
 const movieDetails = (state = {array_agg: []}, action) => {
     switch (action.type) {
         case 'SET_MOVIE_DETAILS':
-            console.log('in details reducer', action.payload)
             return action.payload[0]
         case 'CLEAR_MOVIE_DETAILS':
             return {array_agg: []}
@@ -82,7 +79,7 @@ const movieDetails = (state = {array_agg: []}, action) => {
     }
 }
 
-// Used to store the movie genres
+// Not Used to store the movie genres
 const genres = (state = [], action) => {
     switch (action.type) {
         case 'SET_GENRES':
