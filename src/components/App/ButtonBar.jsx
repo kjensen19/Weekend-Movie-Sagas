@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux'
 import AddIcon from '@mui/icons-material/Add';
 
 
-
+//Top button bar
 function ButtonBar( {colorMode, setColorMode} ) {
 
     const history = useHistory()
@@ -27,7 +27,7 @@ function ButtonBar( {colorMode, setColorMode} ) {
     function handleInfo(){
 
     }
-    //navigate to admin page
+    //navigate to add page
     function handleAdd() {
         history.push('/add')
     }

@@ -14,7 +14,7 @@ function MovieList() {
     const history = useHistory()
     const dispatch = useDispatch();
     const movies = useSelector(store => store.movies);
-
+    //get movies on page load
     useEffect(() => {
         dispatch({ type: 'FETCH_MOVIES' });
     }, []);
